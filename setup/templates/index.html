@@ -1,20 +1,17 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Passagem</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-</head>
-<body>
-    <section class="container mt-4">
-        <h1>Passagens</h1>
-        <form action="{% url 'minha_consulta' %}" method="POST">
-            {% csrf_token %}
-            {{ form }}
-            <input type="submit" value="OK" class="btn btn-success">
-        </form>
-    </section>
-</body>
+{% extends 'base.html' %}
+{% block content %}
+{% load widget_tweaks %}
 
-</html>
+<section class="container col-8">
+<form action="{% url 'minha_consulta' %}" method="POST">
+    {% csrf_token %}
+    {% for field in form.visible_fields %}
+    <div>
+        <label for="{{field.id_for_label}}">{{field.label}}</label>
+        {{field|add_class:'form-control'}}
+    </div>
+    {% endfor %}
+    <input type="submit" value="OK" class="btn btn-success">
+</form>
+</section>
+{% endblock %}

@@ -15,4 +15,3 @@ def revisao_consulta(request):
         'form' : form
         }
         return render(request, 'minha_consulta.html', contexto)
-
